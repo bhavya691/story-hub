@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 import Header from '../Header';
+import firebase from 'firebase';
+import db from '../config';
 
 export default class WriteStory extends React.Component{
     constructor(){
@@ -11,11 +13,16 @@ export default class WriteStory extends React.Component{
             story: ''
         }
     }
-    info = () => {
+    submitStory = async () => {
         const title = this.state.title;
         const author = this.state.author;
         const story = this.state.story;
         if(title !== '' && author !== '' && story !== ''){
+            db.collection('story').add({
+                'Author': author,
+                "Title": title,
+                "Story": story
+            })
             alert('Your story is submitted.')
         }else{
             alert('Please fill all the fields.')
@@ -36,7 +43,7 @@ export default class WriteStory extends React.Component{
                         <TextInput style={styles.textBox} type='text' autoComplete='off' onChangeText={(story) => {
                                 this.setState({story: story})}} value = {this.state.text} placeholder='Write your story' multiline = {true}
                         />
-                        <TouchableOpacity style={styles.btn} onPress={this.info}>
+                        <TouchableOpacity style={styles.btn} onPress={this.submitStory}>
                             <Text style={styles.btnText}>Submit</Text>
                         </TouchableOpacity>
                 </View>
