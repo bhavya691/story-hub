@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView} from 'react-native';
 import Header from '../Header';
 import firebase from 'firebase';
 import db from '../config';
@@ -23,31 +23,33 @@ export default class WriteStory extends React.Component{
                 "Title": title,
                 "Story": story
             })
-            alert('Your story is submitted.')
+            alert('Your story is submitted')
         }else{
-            alert('Please fill all the fields.')
+            alert('Please fill all the fields')
         }
     }
     render(){
         return (
             <View>
                 <Header />
-                <View style={styles.container}>
-                    <View style={styles.form}>
-                        <TextInput style={styles.title} type='text' autoComplete='off' onChangeText={(title) => {
-                                this.setState({title: title})}} value = {this.state.text} placeholder='Story Title'
-                        />
-                        <TextInput style={styles.author} type='text' autoComplete='off' onChangeText={(author) => {
-                                this.setState({author: author})}} value = {this.state.text} placeholder='Author'
-                        />
-                        <TextInput style={styles.textBox} type='text' autoComplete='off' onChangeText={(story) => {
-                                this.setState({story: story})}} value = {this.state.text} placeholder='Write your story' multiline = {true}
-                        />
-                        <TouchableOpacity style={styles.btn} onPress={this.submitStory}>
-                            <Text style={styles.btnText}>Submit</Text>
-                        </TouchableOpacity>
-                </View>
-                </View>
+                <KeyboardAvoidingView behavior='padding' enabled>
+                    <View  style={styles.container} >
+                        <View style={styles.form}>
+                            <TextInput style={styles.title} type='text' autoComplete='off' onChangeText={(title) => {
+                                    this.setState({title: title})}} value = {this.state.text} placeholder='Story Title'
+                            />
+                            <TextInput style={styles.author} type='text' autoComplete='off' onChangeText={(author) => {
+                                    this.setState({author: author})}} value = {this.state.text} placeholder='Author'
+                            />
+                            <TextInput style={styles.textBox} type='text' autoComplete='off' onChangeText={(story) => {
+                                    this.setState({story: story})}} value = {this.state.text} placeholder='Write your story' multiline = {true}
+                            />
+                            <TouchableOpacity style={styles.btn} onPress={this.submitStory}>
+                                <Text style={styles.btnText}>Submit</Text>
+                            </TouchableOpacity>
+                    </View>
+                    </View>
+                </KeyboardAvoidingView>
             </View>
         )
     }
