@@ -6,7 +6,7 @@ export default class Header extends React.Component{
       return (
         <View>
           <TouchableOpacity style={styles.header}>
-            <Text style={styles.headText}>Story Hub</Text>
+            <Text style={styles.headText}>Bed Time Stories</Text>
           </TouchableOpacity>
         </View>
       );
@@ -16,7 +16,7 @@ export default class Header extends React.Component{
   const styles = StyleSheet.create({
     header:{
       backgroundColor: 'lightgreen',
-      padding: 20,
+      padding: 15,
       textAlign: 'center',
       cursor: 'default'
     },
